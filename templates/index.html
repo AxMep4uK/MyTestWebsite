@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Магазин картин</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Каталог картин</h1>
+    <ul>
+    {% for painting in paintings %}
+    <li>
+    <h2>{{ painting.title }}</h2>
+    <p>Автор: {{ painting.artist }}</p>
+    <p>Цена: {{ painting.price }} руб.</p>
+    <a href="{{ url_for('painting_detail', painting_id=painting.id) }}">
+    <img src="{{ url_for('static', filename=painting.image) }}" alt="{{ painting.title }}" width="200"/>
+    </a><br/>
+    <a href="{{ url_for('add_to_cart', painting_id=painting.id) }}">Добавить в корзину</a>
+    </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ url_for('cart') }}">Перейти в корзину</a>
+</body>
+</html>
